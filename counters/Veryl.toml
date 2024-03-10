@@ -1,0 +1,11 @@
+[project]
+name = "hello"
+version = "0.1.0"
+
+authors = ["nrot<nrot13@gmail.com>"]
+
+
+[build]
+target = {type = "directory", path="target"}
+clock_type = "posedge"
+reset_type = "sync_low"

@@ -1,0 +1,27 @@
+/// Скользящее среднее за окно
+pub module SlidingAverage #(
+    parameter WIDTH: u32 = 8, /// Разрядность входных и выходных данных
+    parameter SIZE: u32 = 4, /// Размер окна. Только степень двойки
+    localparam CNT_SIZE: u32 = $clog2(SIZE), 
+    localparam SUMM_SIZE: u32 = $clog2(SIZE) + WIDTH,
+)(
+    clk: input logic,
+    reset: input logic, /// Сигнал сброса
+    data: input signed bit<WIDTH>, /// Знаковые входные данные
+    average: output signed logic<WIDTH>, /// Среднее за окно на каждом шаге
+) {
+    var cache: logic<WIDTH> [SIZE] = {0 repeat SIZE};
+
+    always_ff(clk, reset){
+        if_reset{
+            cache = {0 repeat SIZE};
+            average = 0;
+        } else {
+            cache[msb-1:0] = {data, cache[msb-1:1]};
+            average = 0;
+            for i: u32 in 0..SIZE{
+                average += cache[i];
+            }
+        }
+    }
+}

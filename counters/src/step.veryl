@@ -1,0 +1,38 @@
+/// Это документация, а не комментарий. И она встроена по умолчанию
+// А это комментарий к коду 
+/// Шагающее среднее за SIZE
+pub module StepAverage #(
+    parameter WIDTH: u32 = 8, /// Разрядность входных и выходных данных
+    parameter SIZE: u32 = 4, /// Размер окна для расчета, только степень двойки
+    localparam CNT_SIZE: u32 = $clog2(SIZE), // Почти все функции SystemVerilog доступны. Об этом будет позже в недостатках 
+    localparam SUMM_SIZE: u32 = $clog2(SIZE) + WIDTH,
+)(
+    clk: input logic, /// Клоки данных
+    reset: input logic, /// Сигнал сброса. Уровень определяется по умолчанию для проекта
+    data: input signed bit<WIDTH>, /// Знаковые входные данные
+    sync: output logic, /// Сигнал синхронизации среднего
+    average: output signed logic<WIDTH>, /// Среднее за окно
+){
+    var summ: logic<SUMM_SIZE> = 0;
+    var cnt: logic<CNT_SIZE> = 0;
+    
+    /// Основной блок расчетов
+    always_ff (clk, reset){
+        if_reset{ // А вот тут хитро. Второй параметр always_ff должен быть reset, поэтому это условие обязательно, без него ошибка. 
+            summ = 0;
+            cnt = 0;
+            average = 0;
+            sync = 0;
+        } else {
+            summ += data;
+            cnt += 1;
+            sync = 0; // Интересно, что все присвоение внутри always_ff будет <=, об этом написано в документации. Как по мне это минус, что это нельзя контролировать, бывает нужно.
+            if cnt == SIZE{ // Интересный момент, что для оператора меньше\больше нужно использовать "<:"\">:". 
+                average = summ / SIZE;
+                sync = 1;
+                summ = 0;
+                cnt = 0;
+            }
+        }
+    }
+}

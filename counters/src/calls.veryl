@@ -1,0 +1,7 @@
+module ModuleCall(
+    clk: input logic,
+){
+    inst modB: ModuleB(
+        clk
+    );
+}

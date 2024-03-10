@@ -1,0 +1,9 @@
+pub package PackageRoot{
+    struct StructA{
+        a: logic,
+    }
+    localparam WIDTH: u32 = 16;
+    function sum(a: input logic<WIDTH>, b: output logic<WIDTH>){
+        b = a + b;
+    }
+}

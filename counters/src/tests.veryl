@@ -1,0 +1,18 @@
+module BreakingTest (
+    clk: input logic,
+    data: input logic<8>,
+){
+    var inner: signed logic<16>;
+    #[sv("ram_style=\"block\"")]
+    var _ram: logic<8> [16];
+    always_ff(clk){
+        // inner = $singed(data);
+        // inner = {data[7] repeat 8, data[msb:0]};
+        inner = {data[7] repeat 8, data[7:0]};
+    }
+
+    for i in 0..16: label{
+        assign _ram[i] = inner;
+    }
+
+}

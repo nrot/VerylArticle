@@ -1,0 +1,15 @@
+module ModuleB #(
+    parameter A: u32 = 4,
+    parameter D: string = ""
+    )(
+        clk: input logic
+){
+    inst instB: ModuleA #(
+        A,
+        B: "строка",
+        D
+    ) (
+        clk
+    );
+}
+

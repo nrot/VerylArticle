@@ -1,0 +1,10 @@
+module ModuleA #(
+    parameter A: u32 = 10, 
+    parameter B: string = "",
+    parameter C: i32 = -10,
+    parameter D: u32 = 0
+)(
+    clk: input logic
+){
+    
+}
