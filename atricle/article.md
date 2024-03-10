@@ -163,11 +163,11 @@ pub module StepAverage #(
 - Стилистические предупреждения
 - Предупреждения о возможных логических ошибках
 
-![WarningsErros](imgs/WarningsErors.png)
+![WarningsErros](https://raw.githubusercontent.com/nrot/VerylArticle/main/atricle/imgs/WarningsErors.png)
 Тут линтер подсказывает, что нужно использовать `if_reset` и что sum не используется. 
 
 А дальше кое-что интересное. Линтер сообщает, что переменные не сбрасываются при reset.
-![WarningsErros](imgs/ExtendWarnings.png)
+![WarningsErros](https://raw.githubusercontent.com/nrot/VerylArticle/main/atricle/imgs/ExtendWarnings.png)
 
 Линтер работает шустро и без тормозов, очень приятно. 
 
@@ -407,12 +407,12 @@ veryl doc
 
 и создается папка `doc` в ней нам интересен файл `index.html`.
 
-![Doc](./imgs/Doc.png)
+![Doc](https://raw.githubusercontent.com/nrot/VerylArticle/main/atricle/imgs/Doc.png)
 
 Как видно в документацию попали только те модули и пакеты для которых было указано, что они `pub`.
 
 Откроем `StepAverage`
-![DocStep](./imgs/DocStep.png)
+![DocStep](https://raw.githubusercontent.com/nrot/VerylArticle/main/atricle/imgs/DocStep.png)
 Стандартное сгенерированное описание. Не такое интересное как у TerosHDL, но уже что-то.
 
 ## Пример сырости Veryl
